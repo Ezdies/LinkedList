@@ -21,6 +21,8 @@ public:
     int size();
 
     int &at(int index);
+
+    int *find(int number);
 };
 
 void LinkedList::insert(int number) {
@@ -64,6 +66,18 @@ int &LinkedList::at(int index) {
     }
 }
 
+int *LinkedList::find(int number) {
+    Node *tmp = head;
+
+    while (tmp != nullptr) {
+        if (tmp->data == number) {
+            return &tmp->data;
+        }
+        tmp = tmp->next;
+    }
+    return nullptr;
+}
+
 Node *LinkedList::getHead() const {
     return head;
 }
@@ -88,10 +102,11 @@ int main() {
 
     std::cout << std::endl;
 
-    std::cout << list.size();
+    std::cout << list.size() << std::endl;
+    std::cout << list.at(1) << std::endl;
 
-    std::cout << std::endl;
-    std::cout << list.at(1);
+    std::cout << *list.find(7) << std::endl;
+
 
     return 0;
 }
