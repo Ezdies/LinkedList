@@ -59,6 +59,7 @@ int &LinkedList::at(int index) {
             return tmp->data;
         } else {
             tmp = tmp->next;
+            counter++;
         }
     }
 }
@@ -89,7 +90,8 @@ int main() {
 
     std::cout << list.size();
 
-
+    std::cout << std::endl;
+    std::cout << list.at(1);
 
     return 0;
 }
