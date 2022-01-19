@@ -30,11 +30,11 @@ void LinkedList::insert(int number) {
     newNode->data = number;
     newNode->next = nullptr;
 
-    if (head == nullptr) {
+    if (!head) {
         head = newNode;
     } else {
         Node *tmp = head;
-        while (tmp->next != nullptr) {
+        while (tmp->next) {
             tmp = tmp->next;
         }
         tmp->next = newNode;
@@ -45,7 +45,7 @@ int LinkedList::size() {
     Node *tmp = head;
     int counter = 0;
 
-    while (tmp != nullptr) {
+    while (tmp) {
         tmp = tmp->next;
         counter++;
     }
@@ -69,7 +69,7 @@ int &LinkedList::at(int index) {
 int *LinkedList::find(int number) {
     Node *tmp = head;
 
-    while (tmp != nullptr) {
+    while (tmp) {
         if (tmp->data == number) {
             return &tmp->data;
         }
@@ -84,7 +84,7 @@ Node *LinkedList::getHead() const {
 
 void printList(const LinkedList &list) {
     Node *tmp = list.getHead();
-    while (tmp != nullptr) {
+    while (tmp) {
         std::cout << tmp->data << std::endl;
         tmp = tmp->next;
     }
@@ -106,7 +106,6 @@ int main() {
     std::cout << list.at(1) << std::endl;
 
     std::cout << *list.find(7) << std::endl;
-
 
     return 0;
 }
