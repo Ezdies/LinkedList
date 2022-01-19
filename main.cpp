@@ -23,6 +23,8 @@ public:
     int &at(int index);
 
     int *find(int number);
+
+    void clear();
 };
 
 void LinkedList::insert(int number) {
@@ -78,6 +80,17 @@ int *LinkedList::find(int number) {
     return nullptr;
 }
 
+void LinkedList::clear() {
+    Node *tmp = head;
+    Node* tmp2 = head->next; //starting from second element
+    while(tmp2){
+        delete tmp;
+        tmp = tmp2;
+        tmp2 = tmp2->next;
+    }
+    head = nullptr;
+}
+
 Node *LinkedList::getHead() const {
     return head;
 }
@@ -106,6 +119,9 @@ int main() {
     std::cout << list.at(1) << std::endl;
 
     std::cout << *list.find(7) << std::endl;
+
+    list.clear();
+    printList(list);
 
     return 0;
 }
