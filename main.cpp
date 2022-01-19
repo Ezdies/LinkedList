@@ -14,7 +14,7 @@ public:
         head = nullptr;
     }
 
-    void insert(int number);
+    void append(int number);
 
     Node *getHead() const;
 
@@ -25,9 +25,11 @@ public:
     int *find(int number);
 
     void clear();
+
+    void insert(int index, int number);
 };
 
-void LinkedList::insert(int number) {
+void LinkedList::append(int number) {
     Node *newNode = new Node;
     newNode->data = number;
     newNode->next = nullptr;
@@ -82,13 +84,29 @@ int *LinkedList::find(int number) {
 
 void LinkedList::clear() {
     Node *tmp = head;
-    Node* tmp2 = head->next; //starting from second element
-    while(tmp2){
+    Node *tmp2 = head->next; //starting from second element
+    while (tmp2) {
         delete tmp;
         tmp = tmp2;
         tmp2 = tmp2->next;
     }
     head = nullptr;
+}
+
+void LinkedList::insert(int index, int number) {
+    Node *tmp = head;
+    int counter = 0;
+
+    while (tmp) {
+        if (counter == index) {
+            Node *newNode = new Node;
+            newNode->data = number;
+            newNode->next = tmp->next;
+            tmp->next = newNode;
+        }
+        tmp = tmp->next;
+        counter++;
+    }
 }
 
 Node *LinkedList::getHead() const {
@@ -107,9 +125,9 @@ int main() {
 
     LinkedList list;
 
-    list.insert(9);
-    list.insert(8);
-    list.insert(7);
+    list.append(9);
+    list.append(8);
+    list.append(7);
 
     printList(list);
 
@@ -120,7 +138,9 @@ int main() {
 
     std::cout << *list.find(7) << std::endl;
 
-    list.clear();
+    //   list.clear();
+    std::cout << std::endl;
+    list.insert(2, 2);
     printList(list);
 
     return 0;
